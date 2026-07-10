@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fragments Practice</string>
+    <string name="app_name">Pico Botella</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- SPLASH FRAGMENT STRINGS -->
     <string name="hello_blank_fragment">Soy el fragment HOME</string>
@@ -53,4 +53,10 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="volver">Volver</string>
+    <string name="app_icon_desc">Icono de la aplicación</string>
+    <string name="califica_esta_app">Califica esta app</string>
+    <string name="comparte_tu_opinion">Comparte tu opinión con otros usuarios</string>
+    <string name="escribe_una_opinion">Escribe una opinión</string>
+    <string name="enviar_calificacion">Enviar calificación</string>
 </resources>
