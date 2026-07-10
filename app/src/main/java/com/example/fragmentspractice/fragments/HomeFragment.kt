@@ -1,6 +1,5 @@
 package com.example.fragmentspractice.fragments
 
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,8 +15,6 @@ import com.example.fragmentspractice.databinding.HomeFragmentBinding
 class HomeFragment : Fragment() {
 
     private lateinit var binding: HomeFragmentBinding
-    private var mediaPlayer: MediaPlayer? = null
-    var isMuted = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,12 +31,16 @@ class HomeFragment : Fragment() {
         setupToolbar()
     }
 
+    override fun onResume() {
+        super.onResume()
+        // Sincroniza el ícono de volumen por si el estado del audio
+        // cambió mientras estábamos en otro fragment (ej: Instructions)
+        actualizarIconoVolumen()
+    }
+
     private fun setupMusic() {
-        mediaPlayer = MediaPlayer.create(requireContext(), R.raw.blue_jazz_music).apply {
-            isLooping = true
-            start()
-        }
-        isMuted = true
+        MusicPlayerManager.start(requireContext())
+        actualizarIconoVolumen()
     }
 
     private fun starButtonAction(){
@@ -77,18 +78,26 @@ class HomeFragment : Fragment() {
     private fun volumeButtonAction(){
         val volumeButton = binding.contentToolbar.toolBarVolumeButton
         volumeButton.setOnClickListener {
-            if (isMuted) {
-                volumeButton.setImageResource(R.drawable.mute)
+            if (MusicPlayerManager.isOn) {
+                MusicPlayerManager.pause()
                 Toast.makeText(requireContext(), "Sonido pausado", Toast.LENGTH_SHORT).show()
-                mediaPlayer?.pause()
-            }else {
-                volumeButton.setImageResource(R.drawable.volume)
-                Toast.makeText(requireContext(), "Sonido pausado", Toast.LENGTH_SHORT).show()
-                mediaPlayer?.start()
+            } else {
+                MusicPlayerManager.resume()
+                Toast.makeText(requireContext(), "Sonido activado", Toast.LENGTH_SHORT).show()
             }
-            isMuted = !isMuted
+            actualizarIconoVolumen()
         }
     }
+
+    private fun actualizarIconoVolumen() {
+        val volumeButton = binding.contentToolbar.toolBarVolumeButton
+        if (MusicPlayerManager.isOn) {
+            volumeButton.setImageResource(R.drawable.volume)
+        } else {
+            volumeButton.setImageResource(R.drawable.mute)
+        }
+    }
+
     private fun setupToolbar() {
         starButtonAction()
 
@@ -103,7 +112,8 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mediaPlayer?.release()
-        mediaPlayer = null
+        // No se libera MusicPlayerManager aquí: la música debe seguir
+        // sonando (o mantener su estado) al navegar a otros fragments.
+        // Solo debería liberarse al cerrar la app (ej: en la Activity).
     }
 }

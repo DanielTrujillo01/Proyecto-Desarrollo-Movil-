@@ -9,17 +9,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="24dp">
+        android:padding="24dp"
+        android:background="@drawable/woodfloor">
 
-        <Button
+        <!-- Botón de regreso usando la imagen de tu flecha naranja neón -->
+        <ImageButton
             android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/volver"
-            android:text="←"
-            android:textSize="22sp"
-            android:textColor="?android:attr/textColorPrimary"
+            android:src="@drawable/back"
+            android:scaleType="fitCenter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,6 +43,7 @@
             android:text="@string/app_name"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivAppIcon" />
@@ -53,6 +55,7 @@
             android:layout_marginTop="32dp"
             android:text="@string/califica_esta_app"
             android:textSize="16sp"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvAppName" />
@@ -76,10 +79,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/comparte_tu_opinion"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ratingBar" />
 
+        <!-- Campo de texto configurado con letras y sugerencia en color blanco -->
         <EditText
             android:id="@+id/etComentario"
             android:layout_width="0dp"
@@ -89,10 +94,13 @@
             android:hint="@string/escribe_una_opinion"
             android:inputType="textMultiLine"
             android:minLines="3"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#B3FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvFeedback" />
 
+        <!-- Botón de envío con texto blanco -->
         <Button
             android:id="@+id/btnEnviarCalificacion"
             android:layout_width="0dp"
@@ -100,10 +108,10 @@
             android:layout_marginTop="24dp"
             android:enabled="false"
             android:text="@string/enviar_calificacion"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/etComentario" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </FrameLayout>
