@@ -27,23 +27,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:gravity="end"
+        android:gravity="end|center_vertical"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/btnCancel"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/cancel"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_close" />
 
-        <Button
+        <ImageButton
             android:id="@+id/btnAdd"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@string/add" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="12dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/add"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_check" />
 
     </LinearLayout>
 </LinearLayout>
