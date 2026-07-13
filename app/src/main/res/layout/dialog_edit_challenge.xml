@@ -2,14 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:orientation="vertical"
     android:padding="24dp">
 
     <TextView
         android:id="@+id/tvEditChallengeTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/edit_challenge_title"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold" />
 
@@ -18,36 +21,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/orange"
         android:gravity="top|start"
-        android:hint="@string/challenge_hint"
         android:inputType="textMultiLine"
-        android:minLines="2" />
+        android:minLines="2"
+        android:textColor="@color/black" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:gravity="end|center_vertical"
+        android:gravity="end"
         android:orientation="horizontal">
 
-        <ImageButton
+        <Button
             android:id="@+id/btnCancel"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="?selectableItemBackgroundBorderless"
-            android:contentDescription="@string/cancel"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_close" />
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textColor="@color/orange" />
 
-        <ImageButton
+        <Button
             android:id="@+id/btnSave"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="12dp"
-            android:background="?selectableItemBackgroundBorderless"
-            android:contentDescription="@string/save"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_check" />
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/save"
+            android:textColor="@color/orange" />
 
     </LinearLayout>
 </LinearLayout>

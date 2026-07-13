@@ -1,14 +1,14 @@
 package com.example.fragmentspractice.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import com.example.fragmentspractice.R
 import com.example.fragmentspractice.databinding.DialogAddChallengeBinding
 import com.example.fragmentspractice.viewmodel.ChallengeViewModel
 
@@ -37,6 +37,7 @@ class AddChallengeDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnCancel.setOnClickListener { dismiss() }
         binding.btnAdd.setOnClickListener { addChallenge() }
+        watchChallengeText()
     }
 
     @Suppress("DEPRECATION")
@@ -44,14 +45,22 @@ class AddChallengeDialogFragment : DialogFragment() {
         super.onStart()
         // Keeps the Add/Cancel buttons visible above the keyboard while typing.
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        // The dialog must only close via Cancel/Add, not by tapping outside it.
+        dialog?.setCanceledOnTouchOutside(false)
+    }
+
+    private fun watchChallengeText() {
+        binding.etChallengeText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                binding.btnAdd.isEnabled = !s.isNullOrBlank()
+            }
+        })
     }
 
     private fun addChallenge() {
         val text = binding.etChallengeText.text.toString().trim()
-        if (text.isEmpty()) {
-            Toast.makeText(requireContext(), R.string.challenge_empty_error, Toast.LENGTH_SHORT).show()
-            return
-        }
         viewModel.addChallenge(text)
         dismiss()
     }

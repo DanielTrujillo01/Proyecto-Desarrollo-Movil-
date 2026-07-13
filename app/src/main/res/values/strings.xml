@@ -73,7 +73,7 @@
     <string name="delete_challenge">Eliminar reto</string>
     <string name="add_challenge_title">Agregar reto</string>
     <string name="edit_challenge_title">Editar reto</string>
-    <string name="challenge_hint">Escribe el texto del reto</string>
+    <string name="challenge_hint">Escriba el reto</string>
     <string name="save">Guardar</string>
     <string name="cancel">Cancelar</string>
     <string name="add">Agregar</string>

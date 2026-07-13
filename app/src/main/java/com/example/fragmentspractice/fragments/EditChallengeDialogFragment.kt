@@ -50,6 +50,8 @@ class EditChallengeDialogFragment : DialogFragment() {
         super.onStart()
         // Keeps the Save/Cancel buttons visible above the keyboard while typing.
         dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        // The dialog must only close via Cancel/Save, not by tapping outside it.
+        dialog?.setCanceledOnTouchOutside(false)
     }
 
     private fun saveChallenge() {

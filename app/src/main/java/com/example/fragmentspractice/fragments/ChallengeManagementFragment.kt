@@ -31,6 +31,7 @@ class ChallengeManagementFragment : Fragment() {
 
     private val viewModel: ChallengeViewModel by activityViewModels()
     private lateinit var challengeAdapter: ChallengeAdapter
+    private var wasMusicOnWhenEntering = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,10 +43,18 @@ class ChallengeManagementFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        pauseBackgroundMusicIfNeeded()
         setupRecyclerView()
         setupBackButton()
         setupAddButton()
         observeChallenges()
+    }
+
+    private fun pauseBackgroundMusicIfNeeded() {
+        wasMusicOnWhenEntering = MusicPlayerManager.isOn
+        if (wasMusicOnWhenEntering) {
+            MusicPlayerManager.pause()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -58,6 +67,9 @@ class ChallengeManagementFragment : Fragment() {
 
     private fun setupBackButton() {
         binding.btnBack.setOnClickListener {
+            if (wasMusicOnWhenEntering) {
+                MusicPlayerManager.resume()
+            }
             findNavController().navigateUp()
         }
     }

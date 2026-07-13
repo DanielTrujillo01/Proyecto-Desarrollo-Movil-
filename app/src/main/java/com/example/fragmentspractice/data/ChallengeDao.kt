@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ChallengeDao {
 
-    @Query("SELECT * FROM challenges ORDER BY id ASC")
+    @Query("SELECT * FROM challenges ORDER BY id DESC")
     fun getAllChallenges(): Flow<List<Challenge>>
 
     @Insert
