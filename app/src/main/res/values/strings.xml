@@ -65,7 +65,7 @@
     <string name="quien_gana_titulo">¿Quién gana?</string>
     <string name="quien_gana_descripcion">Gana el último jugador que no abandone el juego.</string>
 
-    <!-- CHALLENGE MANAGEMENT STRINGS (HU6 / HU7 / HU8) -->
+    <!-- CHALLENGE MANAGEMENT STRINGS (HU6 / HU7 / HU8 / HU9) -->
     <string name="manage_challenges_title">Retos</string>
     <string name="no_challenges_yet">Aún no hay retos. Toca + para agregar uno.</string>
     <string name="add_challenge">Agregar reto</string>
@@ -79,4 +79,7 @@
     <string name="add">Agregar</string>
     <string name="challenge_empty_error">El texto del reto no puede estar vacío</string>
     <string name="back">Volver</string>
+    <string name="delete_challenge_title">¿Desea eliminar el siguiente reto?:</string>
+    <string name="delete_confirm_no">NO</string>
+    <string name="delete_confirm_yes">SI</string>
 </resources>

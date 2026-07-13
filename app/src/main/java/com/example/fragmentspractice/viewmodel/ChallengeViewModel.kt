@@ -37,4 +37,10 @@ class ChallengeViewModel(application: Application) : AndroidViewModel(applicatio
             repository.updateChallenge(id, trimmedText)
         }
     }
+
+    fun deleteChallenge(challenge: Challenge) {
+        viewModelScope.launch {
+            repository.deleteChallenge(challenge)
+        }
+    }
 }

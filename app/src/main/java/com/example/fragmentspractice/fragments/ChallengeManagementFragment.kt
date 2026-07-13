@@ -59,7 +59,8 @@ class ChallengeManagementFragment : Fragment() {
 
     private fun setupRecyclerView() {
         challengeAdapter = ChallengeAdapter(
-            onEditClick = { challenge -> openEditChallengeDialog(challenge) }
+            onEditClick = { challenge -> openEditChallengeDialog(challenge) },
+            onDeleteClick = { challenge -> openDeleteChallengeDialog(challenge) }
         )
         binding.rvChallenges.layoutManager = LinearLayoutManager(requireContext())
         binding.rvChallenges.adapter = challengeAdapter
@@ -83,6 +84,11 @@ class ChallengeManagementFragment : Fragment() {
     private fun openEditChallengeDialog(challenge: Challenge) {
         EditChallengeDialogFragment.newInstance(challenge.id, challenge.text)
             .show(childFragmentManager, EditChallengeDialogFragment.TAG)
+    }
+
+    private fun openDeleteChallengeDialog(challenge: Challenge) {
+        DeleteChallengeDialogFragment.newInstance(challenge.id, challenge.text)
+            .show(childFragmentManager, DeleteChallengeDialogFragment.TAG)
     }
 
     private fun observeChallenges() {

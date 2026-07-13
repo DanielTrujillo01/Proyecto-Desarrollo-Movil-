@@ -10,7 +10,8 @@ import com.example.fragmentspractice.databinding.ItemChallengeBinding
 import com.example.fragmentspractice.utils.animateTouch
 
 class ChallengeAdapter(
-    private val onEditClick: (Challenge) -> Unit
+    private val onEditClick: (Challenge) -> Unit,
+    private val onDeleteClick: (Challenge) -> Unit
 ) : ListAdapter<Challenge, ChallengeAdapter.ChallengeViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChallengeViewHolder {
@@ -36,8 +37,7 @@ class ChallengeAdapter(
             }
 
             binding.btnDeleteChallenge.setOnClickListener {
-                // TODO(HU-9): open the delete confirmation dialog once it's implemented
-                it.animateTouch()
+                it.animateTouch { onDeleteClick(challenge) }
             }
         }
     }
