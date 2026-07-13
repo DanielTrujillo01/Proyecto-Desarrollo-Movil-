@@ -13,4 +13,8 @@ class ChallengeRepository(private val challengeDao: ChallengeDao) {
     suspend fun updateChallenge(id: Long, text: String) {
         challengeDao.update(Challenge(id = id, text = text))
     }
+
+    suspend fun deleteChallenge(challenge: Challenge) {
+        challengeDao.delete(challenge)
+    }
 }

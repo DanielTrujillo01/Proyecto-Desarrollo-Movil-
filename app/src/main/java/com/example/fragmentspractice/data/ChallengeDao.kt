@@ -1,6 +1,7 @@
 package com.example.fragmentspractice.data
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
@@ -17,4 +18,7 @@ interface ChallengeDao {
 
     @Update
     suspend fun update(challenge: Challenge)
+
+    @Delete
+    suspend fun delete(challenge: Challenge)
 }
