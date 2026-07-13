@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
@@ -36,6 +37,13 @@ class AddChallengeDialogFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnCancel.setOnClickListener { dismiss() }
         binding.btnAdd.setOnClickListener { addChallenge() }
+    }
+
+    @Suppress("DEPRECATION")
+    override fun onStart() {
+        super.onStart()
+        // Keeps the Add/Cancel buttons visible above the keyboard while typing.
+        dialog?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
     }
 
     private fun addChallenge() {

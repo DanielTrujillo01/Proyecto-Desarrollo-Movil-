@@ -66,17 +66,17 @@
     <string name="quien_gana_descripcion">Gana el último jugador que no abandone el juego.</string>
 
     <!-- CHALLENGE MANAGEMENT STRINGS (HU6 / HU7 / HU8) -->
-    <string name="manage_challenges_title">Challenges</string>
-    <string name="no_challenges_yet">No challenges yet. Tap + to add one.</string>
-    <string name="add_challenge">Add challenge</string>
-    <string name="edit_challenge">Edit challenge</string>
-    <string name="delete_challenge">Delete challenge</string>
-    <string name="add_challenge_title">Add Challenge</string>
-    <string name="edit_challenge_title">Edit Challenge</string>
-    <string name="challenge_hint">Enter the challenge text</string>
-    <string name="save">Save</string>
-    <string name="cancel">Cancel</string>
-    <string name="add">Add</string>
-    <string name="challenge_empty_error">Challenge text cannot be empty</string>
-    <string name="back">Back</string>
+    <string name="manage_challenges_title">Retos</string>
+    <string name="no_challenges_yet">Aún no hay retos. Toca + para agregar uno.</string>
+    <string name="add_challenge">Agregar reto</string>
+    <string name="edit_challenge">Editar reto</string>
+    <string name="delete_challenge">Eliminar reto</string>
+    <string name="add_challenge_title">Agregar reto</string>
+    <string name="edit_challenge_title">Editar reto</string>
+    <string name="challenge_hint">Escribe el texto del reto</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="add">Agregar</string>
+    <string name="challenge_empty_error">El texto del reto no puede estar vacío</string>
+    <string name="back">Volver</string>
 </resources>
