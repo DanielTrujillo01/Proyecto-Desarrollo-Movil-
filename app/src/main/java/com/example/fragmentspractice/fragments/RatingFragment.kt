@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
 import com.example.fragmentspractice.databinding.RatingFragmentBinding
+import com.example.fragmentspractice.utils.BrandedToast
 
 /**
  * HU 4.0: Calificar la aplicación
@@ -63,11 +63,7 @@ class RatingFragment : Fragment() {
 
             guardarCalificacion(rating, comentario)
 
-            Toast.makeText(
-                requireContext(),
-                "¡Gracias por calificarnos con $rating estrellas!",
-                Toast.LENGTH_SHORT
-            ).show()
+            BrandedToast.show(requireContext(), "¡Gracias por calificarnos con $rating estrellas!")
 
             findNavController().navigateUp()
         }

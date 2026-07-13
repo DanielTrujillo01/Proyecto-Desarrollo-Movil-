@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.fragmentspractice.R
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
 import com.example.fragmentspractice.databinding.HomeFragmentBinding
+import com.example.fragmentspractice.utils.BrandedToast
 
 class HomeFragment : Fragment() {
 
@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
     private fun starButtonAction(){
         val startButton = binding.contentToolbar.toolBarStartButton
         startButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Star Pressed", Toast.LENGTH_SHORT).show()
+            BrandedToast.show(requireContext(), "Calificación Presionado")
             findNavController().navigate(R.id.action_homeFragment_to_ratingFragment)
         }
     }
@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
     private fun controllerButtonAction(){
         val controllerButton = binding.contentToolbar.toolBarControllerButton
         controllerButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Instructions Pressed", Toast.LENGTH_SHORT).show()
+            BrandedToast.show(requireContext(), "Instrucciones Presionado")
             findNavController().navigate(R.id.action_homeFragment_to_instructionsFragment)
         }
     }
@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
     private fun addButtonAction(){
         val addButton = binding.contentToolbar.toolBarAddButtom
         addButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Challenge Management Pressed", Toast.LENGTH_SHORT).show()
+            BrandedToast.show(requireContext(), "Gestor de Retos Presionado")
             findNavController().navigate(R.id.action_homeFragment_to_challengeManagementFragment)
         }
     }
@@ -70,7 +70,7 @@ class HomeFragment : Fragment() {
     private fun shareButtonAction(){
         val shareButton = binding.contentToolbar.toolBarShareButton
         shareButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Share Pressed", Toast.LENGTH_SHORT).show()
+            BrandedToast.show(requireContext(), "Compartir Presionado")
             findNavController().navigate(R.id.action_homeFragment_to_shareFragment)
         }
     }
@@ -80,10 +80,10 @@ class HomeFragment : Fragment() {
         volumeButton.setOnClickListener {
             if (MusicPlayerManager.isOn) {
                 MusicPlayerManager.pause()
-                Toast.makeText(requireContext(), "Sonido pausado", Toast.LENGTH_SHORT).show()
+                BrandedToast.show(requireContext(), "Sonido pausado")
             } else {
                 MusicPlayerManager.resume()
-                Toast.makeText(requireContext(), "Sonido activado", Toast.LENGTH_SHORT).show()
+                BrandedToast.show(requireContext(), "Sonido activado")
             }
             actualizarIconoVolumen()
         }

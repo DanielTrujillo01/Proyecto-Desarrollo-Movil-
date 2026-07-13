@@ -3,5 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#f93907</color>
+    <color name="dark_gray">#303030</color>
+    <color name="divider_gray">#E0E0E0</color>
+    <color name="disabled_gray">#9E9E9E</color>
+    <color name="navy">#0A0A23</color>
 
 </resources>
