@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
     private fun starButtonAction(){
         val startButton = binding.contentToolbar.toolBarStartButton
         startButton.setOnClickListener {
-            BrandedToast.show(requireContext(), "Star Pressed")
+            BrandedToast.show(requireContext(), "Calificación Presionado")
             findNavController().navigate(R.id.action_homeFragment_to_ratingFragment)
         }
     }
@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
     private fun controllerButtonAction(){
         val controllerButton = binding.contentToolbar.toolBarControllerButton
         controllerButton.setOnClickListener {
-            BrandedToast.show(requireContext(), "Instructions Pressed")
+            BrandedToast.show(requireContext(), "Instrucciones Presionado")
             findNavController().navigate(R.id.action_homeFragment_to_instructionsFragment)
         }
     }
@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
     private fun addButtonAction(){
         val addButton = binding.contentToolbar.toolBarAddButtom
         addButton.setOnClickListener {
-            BrandedToast.show(requireContext(), "Challenge Management Pressed")
+            BrandedToast.show(requireContext(), "Gestor de Retos Presionado")
             findNavController().navigate(R.id.action_homeFragment_to_challengeManagementFragment)
         }
     }
@@ -70,7 +70,7 @@ class HomeFragment : Fragment() {
     private fun shareButtonAction(){
         val shareButton = binding.contentToolbar.toolBarShareButton
         shareButton.setOnClickListener {
-            BrandedToast.show(requireContext(), "Share Pressed")
+            BrandedToast.show(requireContext(), "Compartir Presionado")
             findNavController().navigate(R.id.action_homeFragment_to_shareFragment)
         }
     }
