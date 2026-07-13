@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.example.fragmentspractice.R
 import com.example.fragmentspractice.databinding.DialogEditChallengeBinding
+import com.example.fragmentspractice.utils.BrandedToast
 import com.example.fragmentspractice.viewmodel.ChallengeViewModel
 
 /**
@@ -57,7 +57,7 @@ class EditChallengeDialogFragment : DialogFragment() {
     private fun saveChallenge() {
         val text = binding.etChallengeText.text.toString().trim()
         if (text.isEmpty()) {
-            Toast.makeText(requireContext(), R.string.challenge_empty_error, Toast.LENGTH_SHORT).show()
+            BrandedToast.show(requireContext(), R.string.challenge_empty_error)
             return
         }
         viewModel.updateChallenge(challengeId, text)
