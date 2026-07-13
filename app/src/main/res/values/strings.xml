@@ -64,4 +64,19 @@
     <string name="como_se_juega_descripcion">Los jugadores forman un círculo y en el centro colocan el dispositivo móvil, luego tocan el botón parpadeante para girar la botella. El jugador que señale la botella debe cumplir el reto que lanza la app, de lo contrario abandona el juego.</string>
     <string name="quien_gana_titulo">¿Quién gana?</string>
     <string name="quien_gana_descripcion">Gana el último jugador que no abandone el juego.</string>
+
+    <!-- CHALLENGE MANAGEMENT STRINGS (HU6 / HU7 / HU8) -->
+    <string name="manage_challenges_title">Challenges</string>
+    <string name="no_challenges_yet">No challenges yet. Tap + to add one.</string>
+    <string name="add_challenge">Add challenge</string>
+    <string name="edit_challenge">Edit challenge</string>
+    <string name="delete_challenge">Delete challenge</string>
+    <string name="add_challenge_title">Add Challenge</string>
+    <string name="edit_challenge_title">Edit Challenge</string>
+    <string name="challenge_hint">Enter the challenge text</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="add">Add</string>
+    <string name="challenge_empty_error">Challenge text cannot be empty</string>
+    <string name="back">Back</string>
 </resources>
