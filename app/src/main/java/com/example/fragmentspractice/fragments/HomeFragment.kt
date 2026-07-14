@@ -7,9 +7,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.view.animation.RotateAnimation
+import android.view.animation.AlphaAnimation
+import android.animation.ObjectAnimator
+import android.view.animation.DecelerateInterpolator
+import androidx.core.animation.doOnEnd
 //import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -57,6 +59,7 @@ class HomeFragment : Fragment() {
         observeChallenges()
         
         // Sincronizar rotación inicial desde el ViewModel (Criterio 4)
+        binding.homeBottle.clearAnimation()
         binding.homeBottle.rotation = viewModel.currentAngle
     }
 
@@ -101,6 +104,7 @@ class HomeFragment : Fragment() {
         if (wasMusicOn) {
             MusicPlayerManager.pause()
         }
+
         playSpinSound() // Criterio 2
 
         // Parámetros de giro aleatorio (Criterio 1 y 3)
@@ -110,27 +114,28 @@ class HomeFragment : Fragment() {
         val toDegrees = fromDegrees + (randomVueltas * 360) + extraDegrees
         val spinDuration = (3000..5000).random().toLong()
 
-        val rotate = RotateAnimation(
-            fromDegrees, toDegrees,
-            Animation.RELATIVE_TO_SELF, 0.5f,
-            Animation.RELATIVE_TO_SELF, 0.5f
+        val animator = ObjectAnimator.ofFloat(
+            binding.homeBottle,
+            View.ROTATION,
+            fromDegrees,
+            toDegrees
         ).apply {
             duration = spinDuration
-            fillAfter = true
-            setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation?) {}
-                override fun onAnimationEnd(animation: Animation?) {
-                    stopSpinSound()
-                    val finalAngle = toDegrees % 360
-                    binding.homeBottle.rotation = finalAngle
-                    viewModel.updateAngle(finalAngle)
-                    startCountdown() // Criterio 5
-                }
-                override fun onAnimationRepeat(animation: Animation?) {}
-            })
+            interpolator = DecelerateInterpolator()
         }
 
-        binding.homeBottle.startAnimation(rotate)
+        animator.doOnEnd {
+            stopSpinSound()
+
+            val finalAngle = toDegrees % 360f
+
+            binding.homeBottle.rotation = finalAngle
+            viewModel.updateAngle(finalAngle)
+
+            startCountdown() // Criterio 5
+        }
+
+        animator.start()
     }
 
     private fun playSpinSound() {

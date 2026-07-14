@@ -26,8 +26,8 @@
 
         <ImageView
             android:id="@+id/ivAppIcon"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:layout_marginTop="32dp"
             android:contentDescription="@string/app_icon_description"
             android:src="@drawable/bottle_in_the_floor"
@@ -52,66 +52,75 @@
             android:id="@+id/tvRateTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="36dp"
             android:text="@string/rate_this_app"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
+            android:textSize="22sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvAppName" />
+            app:layout_constraintTop_toBottomOf="@id/tvAppName"/>
 
         <RatingBar
             android:id="@+id/ratingBar"
             style="?android:attr/ratingBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:numStars="5"
-            android:rating="0"
             android:stepSize="1"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleX="1.4"
+            android:scaleY="1.4"
+            android:progressTint="#FFD700"
+            android:progressBackgroundTint="#555555"
+            android:secondaryProgressTint="#FFD700"
+            app:layout_constraintTop_toBottomOf="@id/tvRateTitle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvRateTitle" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/tvFeedbackMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:text="@string/share_your_opinion"
             android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="17sp"
+            app:layout_constraintTop_toBottomOf="@id/ratingBar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ratingBar" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <!-- Comment input -->
         <EditText
             android:id="@+id/etComment"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="24dp"
+            android:background="@android:drawable/edit_text"
             android:gravity="top|start"
             android:hint="@string/write_an_opinion"
-            android:inputType="textMultiLine"
-            android:minLines="3"
+            android:padding="12dp"
             android:textColor="#FFFFFF"
-            android:textColorHint="#B3FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColorHint="#BDBDBD"
+            android:inputType="textMultiLine"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvFeedbackMessage" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvFeedbackMessage"/>
 
         <!-- Submit button -->
         <Button
             android:id="@+id/btnSubmitRating"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:enabled="false"
+            android:layout_height="56dp"
+            android:layout_marginTop="28dp"
+            android:backgroundTint="@color/orange"
             android:text="@string/submit_rating"
+            android:textStyle="bold"
+            android:textSize="16sp"
             android:textColor="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etComment"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etComment" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
