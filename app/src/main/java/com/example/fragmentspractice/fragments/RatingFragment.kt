@@ -7,34 +7,33 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-
 import com.example.fragmentspractice.databinding.RatingFragmentBinding
 import com.example.fragmentspractice.utils.BrandedToast
 
 /**
- * HU 4.0: Calificar la aplicación
+ * User Story 4.0: Rate the Application
  *
- * Como (Actor): App
- * Quiero (Acción): Que el jugador pueda calificar la aplicación
- * Para poder (Consecuencia): Medir y observar el nivel de satisfacción
- *                              que tiene la app en los usuarios
+ * As a: App
+ * I want: Players to be able to rate the application
+ * So that: User satisfaction can be measured and evaluated.
  *
- * Criterio 1: Como la app no está publicada en Google Play, se simula
- * el flujo de calificación (estrellas + comentario), tal como en la
- * pantalla de referencia de Nequi en la Play Store.
+ * Acceptance Criteria:
+ * Since the app is not published on Google Play, the rating flow
+ * (stars + comment) is simulated, similar to the Play Store rating screen.
  */
 class RatingFragment : Fragment() {
 
     private lateinit var binding: RatingFragmentBinding
 
     companion object {
-        private const val PREFS_NAME = "calificacion_app_prefs"
+        private const val PREFS_NAME = "app_rating_prefs"
         private const val KEY_RATING = "key_rating"
-        private const val KEY_COMENTARIO = "key_comentario"
+        private const val KEY_COMMENT = "key_comment"
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = RatingFragmentBinding.inflate(inflater, container, false)
@@ -43,39 +42,43 @@ class RatingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cargarCalificacionGuardada()
-        ratingBarAction()
-        enviarButtonAction()
-        backButtonAction()
+
+        loadSavedRating()
+        setupRatingBar()
+        setupSubmitButton()
+        setupBackButton()
     }
 
-    private fun ratingBarAction() {
+    private fun setupRatingBar() {
         binding.ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
-            binding.btnEnviarCalificacion.isEnabled = rating > 0
-            binding.tvFeedback.text = mensajeSegunCalificacion(rating)
+            binding.btnSubmitRating.isEnabled = rating > 0
+            binding.tvFeedbackMessage.text = getFeedbackMessage(rating)
         }
     }
 
-    private fun enviarButtonAction() {
-        binding.btnEnviarCalificacion.setOnClickListener {
+    private fun setupSubmitButton() {
+        binding.btnSubmitRating.setOnClickListener {
             val rating = binding.ratingBar.rating
-            val comentario = binding.etComentario.text.toString().trim()
+            val comment = binding.etComment.text.toString().trim()
 
-            guardarCalificacion(rating, comentario)
+            saveRating(rating, comment)
 
-            BrandedToast.show(requireContext(), "¡Gracias por calificarnos con $rating estrellas!")
+            BrandedToast.show(
+                requireContext(),
+                "¡Gracias por calificarnos con $rating estrellas!"
+            )
 
             findNavController().navigateUp()
         }
     }
 
-    private fun backButtonAction() {
+    private fun setupBackButton() {
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
     }
 
-    private fun mensajeSegunCalificacion(rating: Float): String {
+    private fun getFeedbackMessage(rating: Float): String {
         return when {
             rating <= 1f -> "Lamentamos tu experiencia. Cuéntanos qué podemos mejorar."
             rating <= 2f -> "Gracias por tu opinión, seguiremos mejorando."
@@ -85,24 +88,26 @@ class RatingFragment : Fragment() {
         }
     }
 
-    private fun guardarCalificacion(rating: Float, comentario: String) {
+    private fun saveRating(rating: Float, comment: String) {
         val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+
         prefs.edit()
             .putFloat(KEY_RATING, rating)
-            .putString(KEY_COMENTARIO, comentario)
+            .putString(KEY_COMMENT, comment)
             .apply()
     }
 
-    private fun cargarCalificacionGuardada() {
+    private fun loadSavedRating() {
         val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val ratingGuardado = prefs.getFloat(KEY_RATING, 0f)
-        val comentarioGuardado = prefs.getString(KEY_COMENTARIO, "") ?: ""
 
-        if (ratingGuardado > 0f) {
-            binding.ratingBar.rating = ratingGuardado
-            binding.etComentario.setText(comentarioGuardado)
-            binding.btnEnviarCalificacion.isEnabled = true
-            binding.tvFeedback.text = mensajeSegunCalificacion(ratingGuardado)
+        val savedRating = prefs.getFloat(KEY_RATING, 0f)
+        val savedComment = prefs.getString(KEY_COMMENT, "") ?: ""
+
+        if (savedRating > 0f) {
+            binding.ratingBar.rating = savedRating
+            binding.etComment.setText(savedComment)
+            binding.btnSubmitRating.isEnabled = true
+            binding.tvFeedbackMessage.text = getFeedbackMessage(savedRating)
         }
     }
 }

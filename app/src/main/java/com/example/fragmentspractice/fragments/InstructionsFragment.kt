@@ -12,28 +12,30 @@ import androidx.navigation.fragment.findNavController
 import com.example.fragmentspractice.databinding.InstructionsFragmentBinding
 
 /**
- * HU 5.0: Instrucciones del juego
+ * User Story 5.0: Game Instructions
  *
- * Como (Actor): Jugador
- * Quiero (Acción): Conocer las instrucciones del juego "pico botella"
- * Para poder (Consecuencia): Entender y jugar adecuadamente
+ * As a: Player
+ * I want to: Learn the rules of the "Spin the Bottle" game
+ * So that I can: Understand how to play correctly
  *
- * Criterio 1: Si el audio de fondo del home está en ON, al entrar se pausa.
- * Criterio 2: Fondo gris oscuro.
- * Criterio 3: Toolbar personalizada "Reglas del Juego" con flecha atrás,
- *             que regresa al home y restablece el audio si estaba en ON.
- * Criterio 4-7: Títulos y descripciones de "¿Cómo se juega?" y "¿Quién gana?"
- * Criterio 8: Animación de triunfo (trofeo con efecto de aparición/rebote).
+ * Acceptance Criteria:
+ * 1. If the home background music is ON, it pauses when entering this screen.
+ * 2. Dark gray background.
+ * 3. Custom toolbar titled "Game Rules" with a back arrow that returns
+ *    to the home screen and restores the music if it was ON.
+ * 4-7. Titles and descriptions for "How to Play?" and "Who Wins?"
+ * 8. Trophy animation with an appearance/bounce effect.
  */
 class InstructionsFragment : Fragment() {
 
     private lateinit var binding: InstructionsFragmentBinding
 
-    // Guarda si el audio estaba en ON antes de entrar a esta pantalla
-    private var audioEstabaOn = false
+    // Stores whether the music was ON before entering this screen
+    private var wasMusicOn = false
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = InstructionsFragmentBinding.inflate(inflater, container, false)
@@ -43,33 +45,33 @@ class InstructionsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pausarAudioSiEstabaEncendido()
-        backButtonAction()
-        animarTrofeo()
+        pauseMusicIfPlaying()
+        setupBackButton()
+        animateTrophy()
     }
 
-    private fun pausarAudioSiEstabaEncendido() {
-        audioEstabaOn = MusicPlayerManager.isOn
-        if (audioEstabaOn) {
+    private fun pauseMusicIfPlaying() {
+        wasMusicOn = MusicPlayerManager.isOn
+        if (wasMusicOn) {
             MusicPlayerManager.pause()
         }
     }
 
-    private fun backButtonAction() {
+    private fun setupBackButton() {
         binding.btnBack.setOnClickListener {
-            if (audioEstabaOn) {
+            if (wasMusicOn) {
                 MusicPlayerManager.resume()
             }
             findNavController().navigateUp()
         }
     }
 
-    private fun animarTrofeo() {
-        binding.tvTrofeo.scaleX = 0f
-        binding.tvTrofeo.scaleY = 0f
+    private fun animateTrophy() {
+        binding.tvTrophy.scaleX = 0f
+        binding.tvTrophy.scaleY = 0f
 
-        val scaleX = ObjectAnimator.ofFloat(binding.tvTrofeo, View.SCALE_X, 0f, 1f)
-        val scaleY = ObjectAnimator.ofFloat(binding.tvTrofeo, View.SCALE_Y, 0f, 1f)
+        val scaleX = ObjectAnimator.ofFloat(binding.tvTrophy, View.SCALE_X, 0f, 1f)
+        val scaleY = ObjectAnimator.ofFloat(binding.tvTrophy, View.SCALE_Y, 0f, 1f)
 
         scaleX.duration = 700
         scaleY.duration = 700

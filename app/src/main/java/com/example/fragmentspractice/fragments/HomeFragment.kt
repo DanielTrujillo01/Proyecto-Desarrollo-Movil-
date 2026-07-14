@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        actualizarIconoVolumen()
+        updateIconButton()
         // Si el botón es visible, reiniciar la animación de parpadeo
         if (binding.homeButton.isVisible) {
             setupBlinkAnimation()
@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
 
     private fun setupMusic() {
         MusicPlayerManager.start(requireContext())
-        actualizarIconoVolumen()
+        updateIconButton()
     }
 
     private fun setupSpinButton() {
@@ -225,7 +225,7 @@ class HomeFragment : Fragment() {
         // Criterio 8: Reanudar solo tras cerrar el diálogo
         if (wasMusicOn) {
             MusicPlayerManager.resume()
-            actualizarIconoVolumen()
+            updateIconButton()
         }
         // Restaurar controles (Criterio 7)
         binding.homeButton.isVisible = true
@@ -280,11 +280,11 @@ class HomeFragment : Fragment() {
                 MusicPlayerManager.resume()
                 BrandedToast.show(requireContext(), "Sonido activado")
             }
-            actualizarIconoVolumen()
+            updateIconButton()
         }
     }
 
-    private fun actualizarIconoVolumen() {
+    private fun updateIconButton() {
         val volumeButton = binding.contentToolbar.toolBarVolumeButton
         if (MusicPlayerManager.isOn) {
             volumeButton.setImageResource(R.drawable.volume)

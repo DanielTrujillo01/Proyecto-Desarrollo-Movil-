@@ -53,17 +53,17 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
-    <string name="volver">Volver</string>
-    <string name="app_icon_desc">Icono de la aplicación</string>
-    <string name="califica_esta_app">Califica esta app</string>
-    <string name="comparte_tu_opinion">Comparte tu opinión con otros usuarios</string>
-    <string name="escribe_una_opinion">Escribe una opinión</string>
-    <string name="enviar_calificacion">Enviar calificación</string>
-    <string name="reglas_del_juego">Reglas del Juego</string>
-    <string name="como_se_juega_titulo">¿Cómo se juega?</string>
-    <string name="como_se_juega_descripcion">Los jugadores forman un círculo y en el centro colocan el dispositivo móvil, luego tocan el botón parpadeante para girar la botella. El jugador que señale la botella debe cumplir el reto que lanza la app, de lo contrario abandona el juego.</string>
-    <string name="quien_gana_titulo">¿Quién gana?</string>
-    <string name="quien_gana_descripcion">Gana el último jugador que no abandone el juego.</string>
+    <string name="game_rules">Reglas del Juego</string>
+
+    <string name="how_to_play_title">¿Cómo se juega?</string>
+    <string name="how_to_play_description">
+    Gira la botella. El jugador seleccionado deberá cumplir el reto o responder la pregunta.
+</string>
+
+    <string name="who_wins_title">¿Quién gana?</string>
+    <string name="who_wins_description">
+    Gana el jugador que complete con éxito la mayor cantidad de retos o alcance el objetivo acordado.
+</string>
 
     <!-- CHALLENGE MANAGEMENT STRINGS (HU6 / HU7 / HU8 / HU9) -->
     <string name="manage_challenges_title">Retos</string>
@@ -87,4 +87,9 @@
     <string name="close">Cerrar</string>
     <string name="pokemon_image_desc">Imagen de un Pokémon aleatorio</string>
     <string name="no_challenges_available">No hay retos disponibles. ¡Crea algunos en el gestor!</string>
+    <string name="app_icon_description">Icono de la aplicación</string>
+    <string name="rate_this_app">Califica esta app</string>
+    <string name="share_your_opinion">Comparte tu opinión</string>
+    <string name="write_an_opinion">Escribe una opinión</string>
+    <string name="submit_rating">Enviar calificación</string>
 </resources>
