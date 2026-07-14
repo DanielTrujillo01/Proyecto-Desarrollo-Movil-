@@ -72,7 +72,12 @@ class HomeFragment : Fragment() {
         val shareButton = binding.contentToolbar.toolBarShareButton
         shareButton.setOnClickListener {
             BrandedToast.show(requireContext(), "Compartir Presionado")
-            findNavController().navigate(R.id.action_homeFragment_to_shareFragment)
+            val shareText = "App pico botella.\nSolo los valientes lo juegan !!\nhttps://play.google.com/store/apps/details?id=com.nequi.MobileApp&hl=es_419&gl=es"
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "text/plain"
+                putExtra(Intent.EXTRA_TEXT, shareText)
+            }
+            startActivity(Intent.createChooser(shareIntent, "Compartir vía"))
         }
     }
 
