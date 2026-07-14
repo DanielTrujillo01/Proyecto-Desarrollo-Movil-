@@ -82,4 +82,9 @@
     <string name="delete_challenge_title">¿Desea eliminar el siguiente reto?:</string>
     <string name="delete_confirm_no">NO</string>
     <string name="delete_confirm_yes">SI</string>
+
+    <!-- CHALLENGE RESULT DIALOG STRINGS (HU12) -->
+    <string name="close">Cerrar</string>
+    <string name="pokemon_image_desc">Imagen de un Pokémon aleatorio</string>
+    <string name="no_challenges_available">No hay retos disponibles. ¡Crea algunos en el gestor!</string>
 </resources>

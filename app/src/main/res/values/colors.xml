@@ -7,5 +7,7 @@
     <color name="divider_gray">#E0E0E0</color>
     <color name="disabled_gray">#9E9E9E</color>
     <color name="navy">#0A0A23</color>
+    <color name="dialog_gradient_start">#E61A1A1A</color>
+    <color name="dialog_gradient_end">#E6000000</color>
 
 </resources>

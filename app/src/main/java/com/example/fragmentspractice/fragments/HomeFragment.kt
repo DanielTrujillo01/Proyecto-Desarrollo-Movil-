@@ -10,13 +10,17 @@ import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.RotateAnimation
-import androidx.appcompat.app.AlertDialog
+//import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.fragmentspractice.R
+import com.example.fragmentspractice.data.Challenge
 import com.example.fragmentspractice.databinding.HomeFragmentBinding
 import com.example.fragmentspractice.utils.BrandedToast
 import com.example.fragmentspractice.viewmodel.ChallengeViewModel
@@ -28,7 +32,9 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: HomeFragmentBinding
     private val viewModel: HomeViewModel by viewModels()
-    private val challengeViewModel: ChallengeViewModel by viewModels()
+    private val challengeViewModel: ChallengeViewModel by activityViewModels()
+
+    private var currentChallenges: List<Challenge> = emptyList()
 
     private var spinMediaPlayer: MediaPlayer? = null
     private var wasMusicOn = false
@@ -48,6 +54,7 @@ class HomeFragment : Fragment() {
         setupToolbar()
         setupSpinButton()
         observeViewModel()
+        observeChallenges()
         
         // Sincronizar rotación inicial desde el ViewModel (Criterio 4)
         binding.homeBottle.rotation = viewModel.currentAngle
@@ -169,25 +176,49 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun observeChallenges() {
+        // Mantiene el StateFlow "vivo" mientras HomeFragment está visible, para
+        // que siempre refleje lo que hay en Room (soluciona que se quedara
+        // pegado en la lista vacía inicial por no tener ningún colector).
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                challengeViewModel.challenges.collect { challenges ->
+                    currentChallenges = challenges
+                }
+            }
+        }
+    }
+
     private fun showRandomChallengeDialog() {
         // HU 12: Mostrar reto aleatorio
-        val challengesList = challengeViewModel.challenges.value
-        val randomChallengeText = if (challengesList.isNotEmpty()) {
-            challengesList.random().text
+        //val challengesList = challengeViewModel.challenges.value
+        val randomChallengeText = if (currentChallenges.isNotEmpty()) {
+            currentChallenges.random().text
         } else {
-            "No hay retos disponibles. ¡Crea algunos en el gestor!"
+            getString(R.string.no_challenges_available)
         }
 
-        AlertDialog.Builder(requireContext())
-            .setTitle("¡El destino ha hablado!")
-            .setMessage(randomChallengeText)
-            .setCancelable(false)
-            .setPositiveButton("Aceptar") { dialog, _ ->
-                dialog.dismiss()
-                onChallengeDialogClosed()
-                viewModel.onChallengeShown()
-            }
-            .show()
+//        AlertDialog.Builder(requireContext())
+//            .setTitle("¡El destino ha hablado!")
+//            .setMessage(randomChallengeText)
+//            .setCancelable(false)
+//            .setPositiveButton("Aceptar") { dialog, _ ->
+//                dialog.dismiss()
+//                onChallengeDialogClosed()
+//                viewModel.onChallengeShown()
+//            }
+//            .show()
+
+        // Se escucha el cierre del diálogo (botón "Cerrar") para reanudar la partida.
+        childFragmentManager.setFragmentResultListener(
+            ChallengeResultDialogFragment.REQUEST_KEY, viewLifecycleOwner
+        ) { _, _ ->
+            onChallengeDialogClosed()
+            viewModel.onChallengeShown()
+        }
+
+        ChallengeResultDialogFragment.newInstance(randomChallengeText)
+            .show(childFragmentManager, ChallengeResultDialogFragment.TAG)
     }
 
     private fun onChallengeDialogClosed() {
